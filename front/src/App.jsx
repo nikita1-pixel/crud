@@ -1,10 +1,13 @@
+  import Navbar from "./components/Navbar"
+import TableList from "./components/TableList"
 
-function App() {
-  return (
-    <>
-      <h1 className="font-bold text-yellow-600">Nickyeah</h1>
-    </>
-  )
-}
+  function App() {
+    return (
+      <>
+      <Navbar/>
+      <TableList/>
+      </>
+    )
+  }
 
-export default App
+  export default App
