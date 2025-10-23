@@ -1,45 +1,47 @@
-import './App.css'
-import Navbar from './components/Navbar'
-import  TableList  from './components/TableList'
-import ModalForm from './components/ModalForm';
-import { useState } from 'react';
+  import './App.css'
+  import Navbar from './components/Navbar'
+  import  TableList  from './components/TableList'
+  import ModalForm from './components/ModalForm';
+  import { useState } from 'react';
 
 
 
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalMode, setModalMode] = useState('add');
+  function App() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [modalMode, setModalMode] = useState('add');
 
-  const handleOpen = (mode) => {
-      setModalMode(mode);
-      setIsOpen(true);
-  };
+    const handleOpen = (mode) => {
+        setModalMode(mode);
+        setIsOpen(true);
+    };
 
-  const handleSubmit = () => {
-      if (modalMode === 'add') {
-            console.log('modal mode Add');
-      } else {
-          console.log('modal mode Edit');
-      }
-      setIsOpen(false);
-  };
+    const handleSubmit = () => {
+        if (modalMode === 'add') {
+              console.log('modal mode Add');
+        } else {
+            console.log('modal mode Edit');
+        }
+        setIsOpen(false);
+    };
 
 
-  return (
-    <>
-    {/* ++ py-5 px-5 */}
-    <div className="py-5 px-5 ">
-        <Navbar onOpen={() => handleOpen('add')}/>
-        <TableList onOpen={() => handleOpen('edit')}/>
-        <ModalForm isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        mode={modalMode}
-        onSubmit={handleSubmit}/>
-    </div>
-      
-    </>
-  )
-}
+    return (
+      <>
+      {/* ++ py-5 px-5 */}
+      <div className="py-5 px-5 ">
+          <Navbar onOpen={() => handleOpen('add')}/>
+          <TableList handleOpen={handleOpen}/>
+          <ModalForm
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+              mode={modalMode}
+              onSubmit={handleSubmit}
+          />
+      </div>
+        
+      </>
+    )
+  }
 
-export default App
+  export default App

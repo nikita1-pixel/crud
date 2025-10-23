@@ -1,11 +1,11 @@
 export default function Navbar({ onOpen }) {
     return (
         <>
-           <div className="navbar bg-base-100">
+           <div className="navbar bg-base-100 p-4">
             <div className="navbar-start">
                 {/* -- drop down <div></div> */}
                 {/* ++ logo */}
-                <a className="btn btn-ghost text-xl">ClientManager</a>
+                <a className="btn btn-ghost text-xl">Client</a>
                 {/* ++ search input */}
                 
             </div>
