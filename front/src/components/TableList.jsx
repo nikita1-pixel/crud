@@ -1,4 +1,9 @@
     export default function TableList() {
+
+        clients = [{
+            name : "nicky Singh", email : "Nicky.Singh@gmail.com", jon: "Developer", rate : "$500", isactive : true
+        }]
+
         return (
             <>
             <div className="overflow-x-auto mt-10">
