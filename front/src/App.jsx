@@ -18,9 +18,9 @@ function App() {
 
   const handleSubmit = () => {
       if (modalMode === 'add') {
-          // Handle add item
+            console.log('modal mode Add');
       } else {
-          // Handle edit item
+          console.log('modal mode Edit');
       }
       setIsOpen(false);
   };

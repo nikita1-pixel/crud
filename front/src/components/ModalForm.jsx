@@ -3,7 +3,7 @@ export default function ModalForm(isOpen, onClose, mode, onSubmit) {
         <>
         {/* YOU CAN OPEN THE MODAL USING document.getElementByID('ID).showMdal()  METHOD*/}
       
-        <dailog id = "my_modal_3" className = "modal" open={isOpen}>
+        <dialog id = "my_modal_3" className = "modal" open={isOpen}>
         <div className="modal-box">
             <h3 className="font-bold text-lg py-4">{mode ==='edit' ? 'Edit Client'
             : 'Client Details'}</h3>
@@ -14,7 +14,7 @@ export default function ModalForm(isOpen, onClose, mode, onSubmit) {
                 </form>
     
         </div>
-        </dailog>
+        </dialog>
         </>
     );
 }
