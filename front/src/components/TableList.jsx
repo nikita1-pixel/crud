@@ -1,19 +1,35 @@
-        export default function TableList({handleOpen}) {
+import axios from "axios"; 
+import { useEffect } from "react";
+import { useState } from "react";
 
-            const clients = [
-                {
-                id : 1, name : "nicky Singh", email : "Nicky.Singh@gmail.com", jon: "Developer", rate : "$500", isactive : true
-            },
-            {
-                id : 2, name : "nicky Singh2", email : "Nicky.Singh2@gmail.com", jon: "Developer2", rate : "$400", isactive : true
-            },
-            {
-                id : 3,  name : "nicky Singh3", email : "Nicky.Singh3@gmail.com", jon: "Developer3", rate : "$700", isactive : false
-            },
-        ];
+        export default function TableList({handleOpen, searchTerm}) {
+
+            const [tableData , setTableData] = useState([]);
+            const [error , setError] = useState(null);
+
+            useEffect(() => {
+                    const fetchData = async () => {
+                        try {
+                            const response = await axios.get('http://localhost:3000/api/clients');  
+                            setTableData(response.data);
+                        } catch (err) {
+                            setError(err.message);
+                        }
+                    };
+                    fetchData();
+            }, []);
+
+             // Filter the tableData based on the searchTerm
+        const filteredData = tableData.filter(client => 
+        client.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        client.job.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
             return (
                 <>
+                {error && <div className="alert alert-error">{error}</div>}
+
                 <div className="overflow-x-auto mt-10">
         <table className="table">
             {/* head */}
@@ -29,7 +45,7 @@
             </thead>
             <tbody className="hover">
             {/* row 1 */}
-            {clients.map((client)=> (
+            {filteredData.map((client)=> (
                 <tr>
                 <th>{client.id}</th>
                 <td>{client.name}</td>

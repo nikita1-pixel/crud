@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
+export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData }) {
     const [rate, setRate] = useState('');
     const [name, setName] = useState(''); // State for Name
     const [email, setEmail] = useState(''); // State for Email
@@ -11,21 +11,16 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
         setStatus(e.target.value === 'Active');
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            name,
-            email,
-            job,
-            rate: rate === '' ? null : Number(rate),
-            status,
-        };
-        if (typeof onSubmit === 'function') {
-            onSubmit(formData); // use the onSubmit prop so it's not unused
+        try{
+                const clientData ={name, email, job, rate:Number(rate), isactive : status}
+                await onSubmit(clientData)
         }
-        if (typeof onClose === 'function') {
-            onClose();
+        catch(err){
+                console.log("Error adding CLient", err);
         }
+        onClose();
     }
 
     return (
