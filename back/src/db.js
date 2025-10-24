@@ -1,8 +1,9 @@
 import pg from 'pg';
 import env from 'dotenv';
-import { text } from 'express';
+
 
 env.config();
+
 const db = new pg.Client({
     user: process.env.PG_USER,
     host: process.env.PG_HOST,
@@ -10,6 +11,7 @@ const db = new pg.Client({
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT, 
 });
+
 db.connect();
 
 //erroe handling
