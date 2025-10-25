@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData }) {
     const [rate, setRate] = useState('');
@@ -16,14 +17,38 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
         try{
                 const clientData ={name, email, job, rate:Number(rate), isactive : status}
                 await onSubmit(clientData)
+                onClose();
         }
         catch(err){
                 console.log("Error adding CLient", err);
         }
-        onClose();
+        
     }
 
+    useEffect(() =>
+    {
+        if(mode === 'edit' && clientData){
+            setName(clientData.name);
+            setEmail(clientData.email);
+            setJob(clientData.job);
+            setRate(clientData.rate);
+            setStatus(clientData.isactive);
+        }
+        else{
+            //RESET FEILDS WHEN ADDING A NEW CLIENT
+            setName('');
+            setEmail('');
+            setJob('');
+            setRate('');
+            setStatus(false);
+        }
+    }, [mode, clientData]);
+
     return (
+
+
+
+
         <>
             {/* YOU CAN OPEN THE MODAL USING document.getElementById('ID').showModal() METHOD */}
 

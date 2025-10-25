@@ -13,15 +13,21 @@
     const [searchTerm, setSearchTerm] = useState('');
     const [clientData, setClientData] = useState(null); // Keep for future use
 
-    const handleOpen = (mode) => {
+    const handleOpen = (mode, client) => {
+      setClientData(client);
         setModalMode(mode);
         setIsOpen(true);
     };
 
-    const handleSubmit = async (newClientData) => {
-        if (modalMode === 'add') {
-            const response = await axios.post('http://localhost:3000/api/clients', newClientData); // Replace with your actual API URL
+const handleSubmit = async (newClientData) => {
+    if (modalMode === 'add') {
+      try {
+        const response = await axios.post('http://localhost:3000/api/clients', newClientData); // Replace with your actual API URL
         console.log('Client added:', response.data); // Log the response
+        } catch (error) {
+            console.error('Error adding client:', error); // Log any errors
+        }
+      console.log('modal mode Add');
         } else {
             console.log('modal mode Edit');
         }

@@ -26,6 +26,17 @@ import { useState } from "react";
         client.job.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+         const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this client?");
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:3000/api/clients/${id}`); // API call to delete client
+                setTableData((prevData) => prevData.filter(client => client.id !== id)); // Update state
+            } catch (err) {
+                setError(err.message); // Handle any errors
+            }
+        }
+    };
             return (
                 <>
                 {error && <div className="alert alert-error">{error}</div>}
@@ -46,7 +57,7 @@ import { useState } from "react";
             <tbody className="hover">
             {/* row 1 */}
             {filteredData.map((client)=> (
-                <tr>
+                <tr key={client.id}>
                 <th>{client.id}</th>
                 <td>{client.name}</td>
                 <td>{client.email}</td>
@@ -58,10 +69,10 @@ import { useState } from "react";
                     </button>
                 </td>
                 <td>
-                    <button onClick={() => handleOpen('edit')} className=" btn btn-secondary">Update</button>
+                    <button onClick={() => handleOpen('edit', client)} className=" btn btn-secondary">Update</button>
                 </td>
                 <td>
-                    <button className=" btn btn-accent">Delete</button>
+                    <button onClick={() => handleDelete(client.id)} className=" btn btn-accent">Delete</button>
                 </td>
             </tr>
                 ))}
