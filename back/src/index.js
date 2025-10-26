@@ -15,3 +15,5 @@ app.listen(port, () => {
     console.log("Listening on port 3000" );
 });
 
+// nodemon src/index.js
+//http://localhost:3000/api/clients for postman
