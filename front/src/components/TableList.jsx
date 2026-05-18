@@ -10,7 +10,7 @@ import { useState } from "react";
             useEffect(() => {
                     const fetchData = async () => {
                         try {
-                            const response = await axios.get('http://localhost:3000/api/clients');  
+                            const response = await axios.get(`${import.meta.env.VITE_API_URL}/clients`);  
                             setTableData(response.data);
                         } catch (err) {
                             setError(err.message);
@@ -30,7 +30,7 @@ import { useState } from "react";
         const confirmDelete = window.confirm("Are you sure you want to delete this client?");
         if (confirmDelete) {
             try {
-                await axios.delete(`http://localhost:3000/api/clients/${id}`); // API call to delete client
+                await axios.delete(`${import.meta.env.VITE_API_URL}/clients/${id}`); // API call to delete client
                 setTableData((prevData) => prevData.filter(client => client.id !== id)); // Update state
             } catch (err) {
                 setError(err.message); // Handle any errors

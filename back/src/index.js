@@ -3,7 +3,7 @@ import cors from 'cors';
 import clientRoutes from './routes/clientRoute.js';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());//ENALBE CORS POLICY
 app.use(express.json());//WE'LL BE PASSING DATA IN JSON FORMAT

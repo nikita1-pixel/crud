@@ -22,7 +22,7 @@
 const handleSubmit = async (newClientData) => {
     if (modalMode === 'add') {
       try {
-        const response = await axios.post('http://localhost:3000/api/clients', newClientData); // Replace with your actual API URL
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/clients`, newClientData); // Replace with your actual API URL
         console.log('Client added:', response.data); // Log the response
         } catch (error) {
             console.error('Error adding client:', error); // Log any errors
