@@ -1,4 +1,4 @@
-import './App.css'
+import './app.css'
 import Navbar from './components/Navbar'
 import TableList from './components/TableList'
 import ModalForm from './components/ModalForm';
